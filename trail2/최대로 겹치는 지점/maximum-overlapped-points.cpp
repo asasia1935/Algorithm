@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 int main() {
@@ -13,12 +14,6 @@ int main() {
             arr[i - 1]++;
         }
     }
-    int max = 0;
-    for(int i = 0; i < 100; i++) {
-        if (max < arr[i]) {
-            max = arr[i];
-        }
-    }
-    cout << max;
+    cout << *max_element(arr, arr+100);
     return 0;
 }
