@@ -1,33 +1,36 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-using namespace std;
+    #include <iostream>
+    #include <string>
+    #include <algorithm>
+    #include <tuple>
+    using namespace std;
 
-struct Person {
-    string name;
-    int length;
-    int weight;
-};
+    int main() {
+        int n;
+        cin >> n;
 
-bool cmp(const Person& p1, const Person& p2) {
-    return p1.length < p2.length;
-}
+        tuple<int, string, int> people[n];
 
-int main() {
-    int n;
-    cin >> n;
+        for (int i = 0; i < n; i++) {
+            int length;
+            string name;
+            int weight;
 
-    Person people[n]{};
+            cin >> name >> length >> weight;
 
-    for (int i = 0; i < n; i++) {
-        cin >> people[i].name >> people[i].length >> people[i].weight;
+            people[i] = make_tuple(length, name, weight);
+        }
+
+        sort(people, people + n);
+
+        for (int i = 0; i < n; i++) {
+            int length;
+            string name;
+            int weight;
+
+            tie(length, name, weight) = people[i];
+
+            cout << name << " " << length << " " << weight << "\n";
+        }
+
+        return 0;
     }
-
-    sort(people, people + n, cmp);
-
-    for (int i = 0; i < n; i++) {
-        cout << people[i].name << " " << people[i].length << " " << people[i].weight << "\n";
-    }
-
-    return 0;
-}
