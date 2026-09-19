@@ -9,6 +9,9 @@ bool InRange(int x, int y, int n) {
     return (0 <= x && x < n && 0 <= y && y < n);
 }
 
+int dy[4] = {-1, 1, 0, 0};
+int dx[4] = {0, 0, -1, 1};
+
 int main() {
     cin >> n;
 
@@ -24,20 +27,14 @@ int main() {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             int cnt1 = 0;
-            if (InRange(i - 1, j, n) && grid[i - 1][j] == 1) {
-                cnt1++;
-            }
-            
-            if (InRange(i + 1, j, n) && grid[i + 1][j] == 1) {
-                cnt1++;
-            }
-            
-            if (InRange(i, j - 1, n) && grid[i][j - 1] == 1) {
-                cnt1++;
-            }
-            
-            if (InRange(i, j + 1, n) && grid[i][j + 1] == 1) {
-                cnt1++;
+
+            for (int dir = 0; dir < 4; dir++) {
+                int ny = i + dy[dir];
+                int nx = j + dx[dir];
+
+                if (InRange(ny, nx, n) && grid[ny][nx] == 1) {
+                    cnt1++;
+                }
             }
 
             if (cnt1 >= 3) {
